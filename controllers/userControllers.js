@@ -47,6 +47,7 @@ exports.getUsers = async (req, res) => {
         })
     }
 }
+
 exports.deleteUser = async (req, res) => {
     try {
         const userId= req.params.id;
@@ -54,6 +55,20 @@ exports.deleteUser = async (req, res) => {
         const userDeleted = await User.findByIdAndDelete(userId)
         res.status(200).json({"sucess" : true,
             "message":"user deleted"})
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            "sucess": false,
+            "message": error.message
+        })
+    }
+}
+exports.editUser = async (req, res) => {
+    try {
+        const userEdited = await User.findByIdAndUpdate(req.params.id,req.body)
+        res.status(200).json({"sucess" : true,
+            "message":"user updated"})
     }
     catch (error) {
         console.log(error);
