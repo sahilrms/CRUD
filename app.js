@@ -3,8 +3,7 @@ require('dotenv').config();
 const app=express();
 const connectToDB= require("./configs/db.js")
 connectToDB();
-app.get("/",(req,res)=>{
-res.send("Welcome to app")
-})
+const userRoutes = require('./routes/userRoutes.js')
+app.use("/",userRoutes)
 
 module.exports=app
